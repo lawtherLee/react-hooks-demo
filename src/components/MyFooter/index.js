@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.scss";
-export default function MyFooter() {
+export default function MyFooter({ list, updateAllState }) {
+  const isCheckAll = list.every((item) => item.goods_state);
   return (
     <div className="my-footer">
       <div className="custom-control custom-checkbox">
@@ -8,6 +9,8 @@ export default function MyFooter() {
           type="checkbox"
           className="custom-control-input"
           id="footerCheck"
+          checked={isCheckAll}
+          onChange={() => updateAllState(isCheckAll)}
         />
         <label className="custom-control-label" htmlFor="footerCheck">
           全选

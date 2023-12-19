@@ -105,10 +105,25 @@ const App = () => {
     );
     setList(newList);
   };
+
+  // 更新全选状态
+  const updateAllState = (isCheckAll) =>
+    // isCheckAll = !isCheckAll;
+    setList(
+      list.map((item) => {
+        return {
+          ...item,
+          goods_state: !isCheckAll,
+        };
+      })
+    );
+
   return (
     <div style={{ padding: "50px 0" }}>
       <MyHeader />
-      <MyFooter />
+
+      <MyFooter list={list} updateAllState={updateAllState} />
+
       {list.map((item) => (
         <GoodsItem key={item.id} row={item} updateState={updateState} />
       ))}
