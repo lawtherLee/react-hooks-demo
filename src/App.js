@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyHeader from "./components/MyHeader";
 import MyFooter from "./components/MyFooter";
 import "bootstrap/dist/css/bootstrap.css";
@@ -108,7 +108,6 @@ const App = () => {
 
   // 更新全选状态
   const updateAllState = (isCheckAll) =>
-    // isCheckAll = !isCheckAll;
     setList(
       list.map((item) => {
         return {
@@ -117,6 +116,11 @@ const App = () => {
         };
       })
     );
+
+  // 保存本地
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
 
   return (
     <div style={{ padding: "50px 0" }}>

@@ -3,12 +3,14 @@ import "./index.scss";
 export default function MyFooter({ list, updateAllState }) {
   const isCheckAll = list.every((item) => item.goods_state);
 
+  // 总数
   const total = list
     .filter((item) => item.goods_state)
     .reduce((sum, item) => {
       return (sum += item.goods_count);
     }, 0);
 
+  // 总价
   const totalPrice = list
     .filter((item) => item.goods_state)
     .reduce((sum, item) => {
