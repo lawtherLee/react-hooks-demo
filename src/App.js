@@ -3,6 +3,9 @@ import MyHeader from "./components/MyHeader";
 import MyFooter from "./components/MyFooter";
 import "bootstrap/dist/css/bootstrap.css";
 import GoodsItem from "./components/GoodsItem";
+import CarContext from "./context/CarContext";
+
+// import axios from "axios";
 
 const App = () => {
   const arr = [
@@ -122,16 +125,40 @@ const App = () => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
 
+  // useEffect(() => {
+  //   if (arr.length) return;
+  //   const getList = async () => {
+  //     const res = await axios.get("https://www.escook.cn/api/cart");
+  //     setList(res.data.list);
+  //   };
+  //   getList();
+  // }, []);
+
+  const changeCount = (id, newCount) => {
+    setList(
+      list.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            goods_count: newCount,
+          };
+        }
+        return item;
+      })
+    );
+  };
   return (
-    <div style={{ padding: "50px 0" }}>
-      <MyHeader />
+    <CarContext.Provider value={{ changeCount }}>
+      <div style={{ padding: "50px 0" }}>
+        <MyHeader />
 
-      <MyFooter list={list} updateAllState={updateAllState} />
+        <MyFooter list={list} updateAllState={updateAllState} />
 
-      {list.map((item) => (
-        <GoodsItem key={item.id} row={item} updateState={updateState} />
-      ))}
-    </div>
+        {list.map((item) => (
+          <GoodsItem key={item.id} row={item} updateState={updateState} />
+        ))}
+      </div>
+    </CarContext.Provider>
   );
 };
 

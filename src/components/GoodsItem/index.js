@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.scss";
+import MyCount from "../MyCount";
 export default function GoodsItem({ row, updateState }) {
   return (
     <div className="my-goods-item">
@@ -21,7 +22,10 @@ export default function GoodsItem({ row, updateState }) {
         <div className="top">{row.goods_name}</div>
         <div className="bottom">
           <span className="price">¥ {row.goods_price}</span>
-          <span>counter组件</span>
+
+          <span>
+            <MyCount row={row} />
+          </span>
         </div>
       </div>
     </div>
